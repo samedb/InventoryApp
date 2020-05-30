@@ -1,4 +1,5 @@
 ﻿using Inventory.Pages.Predmeti;
+using Inventory.Pages.PromenaLozinke;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -28,9 +29,10 @@ namespace Inventory.Pages
             InitializeComponent();
             if (r != null)
             {
-                AdminPanel.Visibility = r.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
                 UlogujKorisnika(r);
             }
+            var trenutniRadnik = (Application.Current as App).trenutniRadnik;
+            AdminPanel.Visibility = trenutniRadnik.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -121,6 +123,11 @@ namespace Inventory.Pages
         {
             (Application.Current as App).trenutniRadnik = null;
 
+        }
+
+        private void PromeniLozinku_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PromenaLozinkePage());
         }
     }
 }
