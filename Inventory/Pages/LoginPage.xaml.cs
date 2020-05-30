@@ -40,7 +40,7 @@ namespace Inventory.Pages
                 var hash = Hash.GetStringSha256Hash(password);
                 if (result != null && hash == result.Password)
                 {
-                    this.NavigationService.Navigate(new ProstorijePage(result.IsAdmin));
+                    NavigationService.Navigate(new ProstorijePage(result));
                 }
                 else
                 {

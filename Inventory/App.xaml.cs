@@ -13,5 +13,6 @@ namespace Inventory
     /// </summary>
     public partial class App : Application
     {
+        public Radnik trenutniRadnik = null;
     }
 }

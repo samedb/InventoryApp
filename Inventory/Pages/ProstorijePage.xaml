@@ -21,7 +21,7 @@
     <StackPanel>
 
         <Grid>
-            <Button Width="100" Margin="20, 0" HorizontalAlignment="Left" Click="Nazad_Click">Nazad</Button>
+            <Button Width="100" Margin="20, 0" HorizontalAlignment="Left" Click="Nazad_Click">Odjavi se</Button>
             <TextBlock x:Name="Naslov" Padding="10" FontSize="24" HorizontalAlignment="Center">Prostorije</TextBlock>
         </Grid>
         

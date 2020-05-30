@@ -42,17 +42,15 @@ namespace Inventory.Pages
 
         private void ZaduziInventar_Click(object sender, RoutedEventArgs e)
         {
-            PrintDialog printDlg = new PrintDialog();
-            PrintDocument printDoc = new PrintDocument();
-            printDoc.DocumentName = "Print Document";
-            //Call ShowDialog  
-
-            if (printDlg.ShowDialog() != null) printDoc.Print();
+            if (InventarDataGrid.SelectedItems.Count == 0)
+                MessageBox.Show("Morate da selektujete minimum jedan predmet iz inventara!");
+            else
+                NavigationService.Navigate(new ZaduzivanjePage(InventarDataGrid.SelectedItems.Cast<Inventar>().ToList()));
         }
 
         private void RazduziInventar_Click(object sender, RoutedEventArgs e)
         {
-
+                NavigationService.Navigate(new RazduzivanjePage());
         }
 
         private void DodeliSefaProstorije_Click(object sender, RoutedEventArgs e)

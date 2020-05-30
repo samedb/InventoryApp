@@ -22,10 +22,10 @@ namespace Inventory.Pages
     public partial class ProstorijePage : Page
     {
         public ObservableCollection<Prostorija> Prostorije { get; set; }
-        public ProstorijePage(bool isAdmin = false)
+        public ProstorijePage(Radnik r)
         {
             InitializeComponent();
-            AdminPanel.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+            AdminPanel.Visibility = r.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -51,8 +51,7 @@ namespace Inventory.Pages
 
         private void Nazad_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
+            NavigationService.Navigate(new LoginPage());
         }
 
         private void Radnici_Click(object sender, RoutedEventArgs e)
@@ -100,6 +99,17 @@ namespace Inventory.Pages
         private void DodajProstoriju_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ProstorijaDetaljiPage());
+        }
+
+        private void UlogujKorisnika(Radnik r)
+        {
+            (Application.Current as App).trenutniRadnik = r;
+        }
+
+        private void IzlogujKorisnika(Radnik r)
+        {
+            (Application.Current as App).trenutniRadnik = null;
+
         }
     }
 }

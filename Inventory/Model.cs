@@ -62,5 +62,20 @@ namespace Inventory
         [ForeignKey("Prostorija")]
         public int IdProstorije { get; set; }
 
+        internal Inventar Clone()
+        {
+            return new Inventar
+            {
+                Id = this.Id,
+                Naziv = this.Naziv,
+                Marka = this.Marka,
+                Model = this.Model,
+                Cena = this.Cena,
+                Kolicina = this.Kolicina,
+                DatumZaduzivanja = this.DatumZaduzivanja,
+                UsernameRadnikaKojiJeZaduzio = this.UsernameRadnikaKojiJeZaduzio,
+                IdProstorije = this.IdProstorije
+            };
+        }
     }
 }
