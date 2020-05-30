@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Inventory.Pages.Predmeti;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
@@ -55,12 +56,18 @@ namespace Inventory.Pages
 
         private void Nazad_Click(object sender, RoutedEventArgs e)
         {
+            IzlogujKorisnika();
             NavigationService.Navigate(new LoginPage());
         }
 
         private void Radnici_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RadniciPage());
+        }
+
+        private void Predmeti_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PredmetiPage());
         }
 
         private void ObrisiProstoriju_Click(object sender, RoutedEventArgs e)
@@ -110,7 +117,7 @@ namespace Inventory.Pages
             (Application.Current as App).trenutniRadnik = r;
         }
 
-        private void IzlogujKorisnika(Radnik r)
+        private void IzlogujKorisnika()
         {
             (Application.Current as App).trenutniRadnik = null;
 

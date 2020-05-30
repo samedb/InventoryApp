@@ -17,5 +17,5 @@
     <!--<Window.Content>
         <pages:LoginPage/>
     </Window.Content>-->
-    <Frame NavigationUIVisibility="Hidden" Source="Pages/LoginPage.xaml"/>
+    <Frame NavigationUIVisibility="Hidden" Source="Pages/Login/LoginPage.xaml"/>
 </Window>

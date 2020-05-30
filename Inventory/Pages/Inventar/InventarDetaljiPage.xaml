@@ -1,0 +1,49 @@
+﻿<Page x:Class="Inventory.Pages.Inventar.InventarDetaljiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Inventory.Pages.Inventar"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InventarDetaljiPage"      
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="Naslov" Padding="10" FontSize="24" HorizontalAlignment="Center">Inventar</TextBlock>
+
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0, 0, 0, 20">
+                <TextBlock Width="100" VerticalAlignment="Center">Predmet:</TextBlock>
+
+                <ComboBox Width="200" x:Name="cbPredmet"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Width="300" Margin="0, 0, 0, 20">
+                <TextBlock Width="100" VerticalAlignment="Center">Kolicina:</TextBlock>
+
+                <TextBox Width="200" x:Name="tbKolicina"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Margin="20" Orientation="Horizontal" HorizontalAlignment="Center" Width="300">
+            <Button Width="140" Margin="0, 0, 20, 0" Click="Zapamti_Click">Zapamti izmene</Button>
+            <Button Width="140" Click="Nazad_Click">Odbaci izmene</Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -19,8 +19,8 @@ namespace Inventory.Pages
     /// </summary>
     public partial class ZavrsiRazduzivanje : Page
     {
-        private List<Inventar> razduzeniPredmeti;
-        public ZavrsiRazduzivanje(List<Inventar> razduzeniPredmeti)
+        private List<Inventory.Inventar> razduzeniPredmeti;
+        public ZavrsiRazduzivanje(List<Inventory.Inventar> razduzeniPredmeti)
         {
             this.razduzeniPredmeti = razduzeniPredmeti;
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace Inventory.Pages
             {
                 doc.DodajNaslov("Izvestaj o razduzivanju", 14);
                 doc.DodajParagraf("Potvrdjujem da sam dana 01.01.2020. godine zaduzio sledeci inventar koji mi se stavlja na zaduzenje ... tekst osmislite samostalno");
-                doc.DodajTabelu<Inventar>(razduzeniPredmeti);
+                doc.DodajTabelu<Inventory.Inventar>(razduzeniPredmeti);
                 doc.DodajMPiPotpis();
             }
 

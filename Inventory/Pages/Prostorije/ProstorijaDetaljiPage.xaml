@@ -35,7 +35,7 @@
                 <StackPanel Orientation="Horizontal" Width="300" Margin="0, 0, 0, 20">
                     <TextBlock Width="100" VerticalAlignment="Center">Sef prostorije:</TextBlock>
 
-                    <ComboBox Width="200" x:Name="cbUsernameSefa" DisplayMemberPath="Username"/>
+                    <ComboBox Width="200" x:Name="cbUsernameSefa"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="300">

@@ -1,0 +1,43 @@
+﻿<Page x:Class="Inventory.Pages.Predmeti.PredmetDetaljiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Inventory.Pages.Predmeti"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PredmetDetaljiPage"    
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="Naslov" Padding="10" FontSize="24" HorizontalAlignment="Center">Detalji predmeta</TextBlock>
+
+            <StackPanel Grid.Row="1">
+                <TextBox Width="300" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 20, 0, 20" materialDesign:HintAssist.Hint="Id" x:Name="tbId"/>
+                <TextBox Width="300" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 0, 0, 20" materialDesign:HintAssist.Hint="Naziv" x:Name="tbNaziv"/>
+                <TextBox Width="300" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 0, 0, 20" materialDesign:HintAssist.Hint="Marka" x:Name="tbMarka"/>
+                <TextBox Width="300" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 0, 0, 20" materialDesign:HintAssist.Hint="Model" x:Name="tbModel"/>
+                <TextBox Width="300" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 0, 0, 20" materialDesign:HintAssist.Hint="Cena" x:Name="tbCena"/>
+            </StackPanel>
+
+                
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="300" Margin="20">
+            <Button Width="140" Margin="0, 0, 20, 0" Click="Zapamti_Click">Zapamti izmene</Button>
+            <Button Width="140" Click="Nazad_Click">Odbaci izmene</Button>
+        </StackPanel>
+    </Grid>
+</Page>

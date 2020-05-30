@@ -1,4 +1,6 @@
 ﻿using Inventory.Dialogs;
+using Inventory.Pages.Inventar;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -28,10 +30,21 @@ namespace Inventory.Pages
             InitializeComponent();
             prostorija = p;
             Naslov.Text = "Inventar prostorije: " + prostorija.NazivProstorije;
-            if (prostorija.SefProstorije != null)
-                DodelaSefaButton.Visibility = Visibility.Visible;
-            else
-                DodelaSefaButton.Visibility = Visibility.Collapsed;
+
+            DodelaSefaButton.Visibility = (prostorija.SefProstorije != null) ? Visibility.Collapsed : Visibility.Visible;
+
+            var trenutniRadnik = (Application.Current as App).trenutniRadnik;
+            SefProstorijePanel.Visibility = trenutniRadnik.Username == prostorija.SefProstorije.Username ? Visibility.Visible : Visibility.Collapsed;
+
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (var db = new InventoryContext())
+            {
+                var inventar = db.Inventar.Where(i => i.Prostorija == prostorija).Include(i => i.Predmet).ToList();
+                InventarDataGrid.ItemsSource = inventar;
+            }
         }
 
         private void Nazad_Click(object sender, RoutedEventArgs e)
@@ -45,7 +58,7 @@ namespace Inventory.Pages
             if (InventarDataGrid.SelectedItems.Count == 0)
                 MessageBox.Show("Morate da selektujete minimum jedan predmet iz inventara!");
             else
-                NavigationService.Navigate(new ZaduzivanjePage(InventarDataGrid.SelectedItems.Cast<Inventar>().ToList()));
+                NavigationService.Navigate(new ZaduzivanjePage(InventarDataGrid.SelectedItems.Cast<Inventory.Inventar>().ToList()));
         }
 
         private void RazduziInventar_Click(object sender, RoutedEventArgs e)
@@ -62,12 +75,32 @@ namespace Inventory.Pages
             }
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new InventoryContext())
+            NavigationService.Navigate(new InventarDetaljiPage(prostorija));
+        }
+
+        private void ObrisiPredmet_Click(object sender, RoutedEventArgs e)
+        {
+            if (InventarDataGrid.SelectedItem != null)
             {
-                var inventar = db.Inventar.Where(i => i.Prostorija == prostorija).ToList();
-                InventarDataGrid.ItemsSource = inventar;
+                var selektovaniInventar = InventarDataGrid.SelectedItem as Inventory.Inventar;
+
+                var dialogResult = MessageBox.Show("Da li ste sigurni da zelite da izbrisete iz inventara: " + selektovaniInventar.Predmet, "Brisanje", MessageBoxButton.YesNo);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    using (var db = new InventoryContext())
+                    {
+                        db.Remove(selektovaniInventar);
+                        db.SaveChanges();
+                    }
+                    // Da osvezim listu inventara
+                    Page_Loaded(null, null);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Morate da selektujete predmet iz inventara koju zelite da obrisete!");
             }
         }
     }

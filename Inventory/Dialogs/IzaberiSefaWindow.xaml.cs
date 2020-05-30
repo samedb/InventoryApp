@@ -30,7 +30,7 @@ namespace Inventory.Dialogs
             using (var db = new InventoryContext())
             {
                 var radnici = db.Radnici.ToList();
-                cbRadnici.ItemsSource = radnici.Select(r => r.Username);
+                cbRadnici.ItemsSource = radnici;
                 cbRadnici.SelectedIndex = 0;
             }
         }
@@ -40,7 +40,8 @@ namespace Inventory.Dialogs
             using (var db = new InventoryContext())
             {
                 var p = db.Prostorije.Find(prostorija.Id);
-                p.SefProstorije = cbRadnici.SelectedItem as Radnik;
+                var usernameRadnika = (cbRadnici.SelectedItem as Radnik).Username;
+                p.SefProstorije = db.Radnici.Find(usernameRadnika);
                 db.SaveChanges();
                 DialogResult = true;
             }

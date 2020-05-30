@@ -71,6 +71,11 @@ namespace Inventory
         public string Marka { get; set; }
         public string Model { get; set; }
         public int Cena { get; set; }
+
+        public override string ToString()
+        {
+            return $"({Id}) {Naziv} {Marka} {Model}";
+        }
     }
 
     public class Inventar

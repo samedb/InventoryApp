@@ -19,7 +19,7 @@ namespace Inventory.Pages
     /// </summary>
     public partial class ZaduzivanjePage : Page
     {
-        public ZaduzivanjePage(List<Inventar> inventar)
+        public ZaduzivanjePage(List<Inventory.Inventar> inventar)
         {
             InitializeComponent();
             InventarDataGrid.ItemsSource = inventar;
@@ -33,14 +33,14 @@ namespace Inventory.Pages
 
         private void ObrisiRed_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = (sender as Button).DataContext as Inventar;
-            var list = InventarDataGrid.ItemsSource.Cast<Inventar>().ToList();
+            var selectedItem = (sender as Button).DataContext as Inventory.Inventar;
+            var list = InventarDataGrid.ItemsSource.Cast<Inventory.Inventar>().ToList();
             list.Remove(selectedItem);
             InventarDataGrid.ItemsSource = list;
         }
         private void Zaduzi_Click(object sender, RoutedEventArgs e)
         {
-            var zaZaduzivanje = InventarDataGrid.Items.Cast<Inventar>().ToList();
+            var zaZaduzivanje = InventarDataGrid.Items.Cast<Inventory.Inventar>().ToList();
             if (zaZaduzivanje.Count == 0)
             {
                 MessageBox.Show("Lista mora da sadrzi minimum jedan element!");

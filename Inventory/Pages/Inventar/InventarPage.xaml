@@ -30,14 +30,12 @@
             <DataGrid Grid.Column="0" x:Name="InventarDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" Margin="10"
                       CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}"/>
-                    <DataGridTextColumn Header="Marka" Binding="{Binding Marka}"/>
-                    <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
-                    <DataGridTextColumn Header="Cena" Binding="{Binding Cena}"/>
+                    <DataGridTextColumn Header="Id inventara" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding Predmet.Naziv}"/>
+                    <DataGridTextColumn Header="Marka" Binding="{Binding Predmet.Marka}"/>
+                    <DataGridTextColumn Header="Model" Binding="{Binding Predmet.Model}"/>
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Predmet.Cena}"/>
                     <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}"/>
-                    <DataGridTextColumn Header="Datum zaduzivanja" Binding="{Binding DatumZaduzivanja}"/>
-                    <DataGridTextColumn Header="Ko je zaduzio" Binding="{Binding UsernameRadnikaKojiJeZaduzio}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -47,11 +45,10 @@
                 <Button Margin="10" Click="RazduziInventar_Click">Razduzi inventar</Button>
                 <Button Margin="10" Click="DodeliSefaProstorije_Click" x:Name="DodelaSefaButton">Dodeli sefa prostorije</Button>
 
-                <StackPanel x:Name="AdminPanel">
-                    <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="0, 20, 0, 10">Admin Panel</TextBlock>
-                    <Button Margin="10" Click="ZaduziInventar_Click">Dodaj predmet u inventar</Button>
-                    <Button Margin="10" Click="ZaduziInventar_Click">Izmeni predmet</Button>
-                    <Button Margin="10" Click="ZaduziInventar_Click">Obrisi predmet iz inventara</Button>
+                <StackPanel x:Name="SefProstorijePanel">
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="0, 20, 0, 10">Sef prostorije Panel</TextBlock>
+                    <Button Margin="10" Click="DodajPredmet_Click">Dodaj predmet u inventar</Button>
+                    <Button Margin="10" Click="ObrisiPredmet_Click">Obrisi predmet iz inventara</Button>
                 </StackPanel>
 
             </StackPanel>

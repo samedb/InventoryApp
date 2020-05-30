@@ -25,7 +25,7 @@ namespace Inventory.Pages
         public RazduzivanjePage()
         {
             InitializeComponent();
-            InventarDataGrid.ItemsSource = new List<Inventar>();
+            InventarDataGrid.ItemsSource = new List<Inventory.Inventar>();
         }
 
         private void Nazad_Click(object sender, RoutedEventArgs e)
@@ -36,15 +36,15 @@ namespace Inventory.Pages
 
         private void ObrisiRed_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = (sender as Button).DataContext as Inventar;
-            var list = InventarDataGrid.ItemsSource.Cast<Inventar>().ToList();
+            var selectedItem = (sender as Button).DataContext as Inventory.Inventar;
+            var list = InventarDataGrid.ItemsSource.Cast<Inventory.Inventar>().ToList();
             list.Remove(selectedItem);
             InventarDataGrid.ItemsSource = list;
         }
 
         private void Razduzi_Click(object sender, RoutedEventArgs e)
         {
-            var zaRazduzivanje = InventarDataGrid.Items.Cast<Inventar>().ToList();
+            var zaRazduzivanje = InventarDataGrid.Items.Cast<Inventory.Inventar>().ToList();
             if (zaRazduzivanje.Count == 0)
             {
                 MessageBox.Show("Lista mora da sadrzi minimum jedan element!");
@@ -80,14 +80,14 @@ namespace Inventory.Pages
         }
         private void DodajPredmet_Click(object sender, RoutedEventArgs e)
         {
-            var noviPredmet = new Inventar();
+            var noviPredmet = new Inventory.Inventar();
             var dialog = new DodajInventar(noviPredmet);
             var result = dialog.ShowDialog();
 
             if (result == true)
             {
                 // Dodaj taj novi predmet u listu
-                var list = InventarDataGrid.ItemsSource.Cast<Inventar>().ToList();
+                var list = InventarDataGrid.ItemsSource.Cast<Inventory.Inventar>().ToList();
                 list.Add(noviPredmet);
                 InventarDataGrid.ItemsSource = list;
             }
