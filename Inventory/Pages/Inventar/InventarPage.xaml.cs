@@ -63,7 +63,7 @@ namespace Inventory.Pages
 
         private void RazduziInventar_Click(object sender, RoutedEventArgs e)
         {
-                NavigationService.Navigate(new RazduzivanjePage());
+                NavigationService.Navigate(new RazduzivanjePage(prostorija));
         }
 
         private void DodeliSefaProstorije_Click(object sender, RoutedEventArgs e)
@@ -102,6 +102,11 @@ namespace Inventory.Pages
             {
                 MessageBox.Show("Morate da selektujete predmet iz inventara koju zelite da obrisete!");
             }
+        }
+
+        private void SviZaduzeniPredmeti_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SviZaduzeniPredmetiPage(prostorija));
         }
     }
 }

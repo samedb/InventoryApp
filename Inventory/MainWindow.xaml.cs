@@ -22,6 +22,12 @@ namespace Inventory
     {
         public MainWindow()
         {
+            // DB warm up
+            using (var db = new InventoryContext())
+            {
+                var model = db.Model;
+            }
+
             InitializeComponent();
         }
 
