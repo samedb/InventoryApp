@@ -40,7 +40,7 @@ namespace Inventory.Dialogs
             using (var db = new InventoryContext())
             {
                 var p = db.Prostorije.Find(prostorija.Id);
-                p.UsernameSefa = cbRadnici.SelectedItem.ToString();
+                p.SefProstorije = cbRadnici.SelectedItem as Radnik;
                 db.SaveChanges();
                 DialogResult = true;
             }

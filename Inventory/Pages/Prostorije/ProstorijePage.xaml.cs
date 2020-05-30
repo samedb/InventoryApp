@@ -22,17 +22,21 @@ namespace Inventory.Pages
     public partial class ProstorijePage : Page
     {
         public ObservableCollection<Prostorija> Prostorije { get; set; }
-        public ProstorijePage(Radnik r)
+        public ProstorijePage(Radnik r = null)
         {
             InitializeComponent();
-            AdminPanel.Visibility = r.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
+            if (r != null)
+            {
+                AdminPanel.Visibility = r.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
+                UlogujKorisnika(r);
+            }
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             using (var db = new InventoryContext())
             {
-                var prostorije = await db.Prostorije.ToListAsync();
+                var prostorije = await db.Prostorije.Include(p => p.SefProstorije).ToListAsync();
                 ProstorijeDataGrid.ItemsSource = prostorije;
             }
         }

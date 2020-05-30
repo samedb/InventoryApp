@@ -39,7 +39,7 @@
                     <DataGridTextColumn Header="Sirina" Binding="{Binding Sirina}"/>
                     <DataGridTextColumn Header="Duzina" Binding="{Binding Duzina}"/>
                     <DataGridTextColumn Header="Visina" Binding="{Binding Visina}"/>
-                    <DataGridTextColumn Header="Korisnicko ime sefa prostorije" Binding="{Binding UsernameSefa}" Width="3*"/>
+                    <DataGridTextColumn Header="Sef prostorije" Binding="{Binding SefProstorije.Username}" Width="2*"/>
                 </DataGrid.Columns>
             </DataGrid>
 

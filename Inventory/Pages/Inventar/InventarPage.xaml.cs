@@ -28,7 +28,7 @@ namespace Inventory.Pages
             InitializeComponent();
             prostorija = p;
             Naslov.Text = "Inventar prostorije: " + prostorija.NazivProstorije;
-            if (string.IsNullOrEmpty(prostorija.UsernameSefa))
+            if (prostorija.SefProstorije != null)
                 DodelaSefaButton.Visibility = Visibility.Visible;
             else
                 DodelaSefaButton.Visibility = Visibility.Collapsed;
@@ -66,7 +66,7 @@ namespace Inventory.Pages
         {
             using (var db = new InventoryContext())
             {
-                var inventar = db.Inventar.Where(i => i.IdProstorije == prostorija.Id).ToList();
+                var inventar = db.Inventar.Where(i => i.Prostorija == prostorija).ToList();
                 InventarDataGrid.ItemsSource = inventar;
             }
         }

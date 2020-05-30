@@ -28,10 +28,10 @@ namespace Inventory.Dialogs
         {
             try
             {
-                inventar.Naziv = tbNaziv.Text;
-                inventar.Marka = tbMarka.Text;
-                inventar.Model = tbMarka.Text;
-                inventar.Cena = int.Parse(tbCena.Text);
+                //inventar.Naziv = tbNaziv.Text;
+                //inventar.Marka = tbMarka.Text;
+                //inventar.Model = tbMarka.Text;
+                //inventar.Cena = int.Parse(tbCena.Text);
                 inventar.Kolicina = int.Parse(tbKolicina.Text);
                 DialogResult = true;
             }

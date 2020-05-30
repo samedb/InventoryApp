@@ -28,7 +28,6 @@ namespace Inventory.Pages
             InitializeComponent();
             dodavanjeNoveProstorije = true;
             prostorija = new Prostorija();
-            popuniPoljaSaProstorijom();
             UcitajSveRadnike();
         }
 
@@ -37,8 +36,8 @@ namespace Inventory.Pages
             InitializeComponent();
             dodavanjeNoveProstorije = false;
             prostorija = p;
-            popuniPoljaSaProstorijom();
             UcitajSveRadnike();
+            popuniPoljaSaProstorijom();
         }
 
         private void UcitajSveRadnike()
@@ -46,7 +45,7 @@ namespace Inventory.Pages
             using (var db = new InventoryContext())
             {
                 var radnici = db.Radnici.ToList();
-                cbUsernameSefa.ItemsSource = radnici.Select(r => r.Username);
+                cbUsernameSefa.ItemsSource = radnici;
             }
         }
 
@@ -58,8 +57,7 @@ namespace Inventory.Pages
             tbDuzina.Text = prostorija.Duzina;
             tbVisina.Text = prostorija.Visina;
 
-            if (prostorija.UsernameSefa != "")
-                cbUsernameSefa.SelectedItem = prostorija.UsernameSefa;
+            cbUsernameSefa.SelectedItem = cbUsernameSefa.ItemsSource.Cast<Radnik>().First(r => r.Username == prostorija.SefProstorije.Username);
         }
 
         private void uzmiPodatkeProstorijeIzPolja()
@@ -69,7 +67,7 @@ namespace Inventory.Pages
             prostorija.Sirina = tbSirina.Text;
             prostorija.Duzina = tbDuzina.Text;
             prostorija.Visina = tbVisina.Text;
-            prostorija.UsernameSefa = cbUsernameSefa.SelectedItem.ToString();
+            prostorija.SefProstorije = cbUsernameSefa.SelectedItem as Radnik;
         }
 
         private void Nazad_Click(object sender, RoutedEventArgs e)
@@ -85,6 +83,8 @@ namespace Inventory.Pages
                 try
                 {
                     uzmiPodatkeProstorijeIzPolja();
+                    // Recimo da ovo ovako mora, zbog nekih cuda sa ef core
+                    prostorija.SefProstorije = db.Radnici.Find(cbUsernameSefa.Text);
 
                     if (dodavanjeNoveProstorije)
                     {
@@ -99,7 +99,7 @@ namespace Inventory.Pages
                         p.Sirina = prostorija.Sirina;
                         p.Duzina = prostorija.Duzina;
                         p.Visina = prostorija.Visina;
-                        p.UsernameSefa = prostorija.UsernameSefa;
+                        p.SefProstorije = prostorija.SefProstorije;
                         db.SaveChanges();
                     }
                     NavigationService.GoBack();
