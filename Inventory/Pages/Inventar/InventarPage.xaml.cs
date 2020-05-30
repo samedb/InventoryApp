@@ -42,7 +42,7 @@ namespace Inventory.Pages
         {
             using (var db = new InventoryContext())
             {
-                var inventar = db.Inventar.Where(i => i.Prostorija == prostorija).Include(i => i.Predmet).ToList();
+                var inventar = db.Inventar.Where(i => i.Prostorija == prostorija).Include(i => i.Predmet).Include(i => i.Prostorija).ToList();
                 InventarDataGrid.ItemsSource = inventar;
             }
         }

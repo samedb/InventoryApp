@@ -76,7 +76,13 @@ namespace Inventory
             foreach (var item in lista)
             {
                 foreach (var prop in allProperties)
-                    table.AddCell(prop.GetValue(item).ToString());
+                {
+                    var value = prop.GetValue(item);
+                    if (value == null)
+                        table.AddCell("");
+                    else
+                        table.AddCell(value.ToString());
+                }
             }
 
             SetStyle(table);
@@ -169,7 +175,7 @@ namespace Inventory
             table.AddCell(new Cell()
                 .SetBorder(Border.NO_BORDER)
                 .SetTextAlignment(TextAlignment.CENTER)
-                .Add(new Paragraph("Ovlašćeno lice fakulteta \n\n ___________________________")));
+                .Add(new Paragraph("Potpis radnika \n\n ___________________________")));
 
             table.SetMarginTop(20);
             document.Add(table);

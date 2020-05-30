@@ -32,11 +32,10 @@
                     CanUserDeleteRows="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding Naziv}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Marka" Binding="{Binding Marka}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Model" Binding="{Binding Model}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Cena" Binding="{Binding Cena}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Ko je zaduzio" Binding="{Binding UsernameRadnikaKojiJeZaduzio}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Predmet.Naziv}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Marka" Binding="{Binding Predmet.Marka}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Predmet.Model}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding Predmet.Cena}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}" IsReadOnly="False"/>
                 <DataGridTemplateColumn Width="70">
                     <DataGridTemplateColumn.CellTemplate>

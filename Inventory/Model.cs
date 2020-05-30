@@ -58,7 +58,7 @@ namespace Inventory
 
         public override string ToString()
         {
-            return $"{Id}  Naziv: {NazivProstorije}  Sprat: {Sprat}  Sef: {SefProstorije.Username}";
+            return $"{Id}  Naziv: {NazivProstorije}  Sprat: {Sprat}  Sef: {SefProstorije?.Username}";
         }
     }
 

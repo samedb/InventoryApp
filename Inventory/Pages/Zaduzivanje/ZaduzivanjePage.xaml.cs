@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,10 +50,10 @@ namespace Inventory.Pages
 
             using (var db = new InventoryContext())
             {
-                var sviPredmeti = db.Inventar.Where(i => i.Prostorija == zaZaduzivanje[0].Prostorija).ToList();
                 foreach (var predmet in zaZaduzivanje)
                 {
-                    var predmetUBazi = sviPredmeti.First(p => p.Predmet.Id == predmet.Predmet.Id);
+                    var inventar = db.Inventar.Include(i => i.Predmet);
+                    var predmetUBazi = inventar.First(i => i.Predmet.Id == predmet.Predmet.Id);
                     if (predmetUBazi.Kolicina < predmet.Kolicina)
                     {
                         MessageBox.Show("Ne mozete da razduzite vise predmeta nego sto se nalazi u inventaru!");
@@ -67,6 +68,16 @@ namespace Inventory.Pages
                     {
                         predmetUBazi.Kolicina -= predmet.Kolicina;
                     }
+
+                    // Unesi u tabelu Zaduzenje
+                    db.Add(new Zaduzenje
+                    {
+                        Radnik = db.Radnici.Find((Application.Current as App).trenutniRadnik.Username),
+                        Predmet = db.Predmeti.Find(predmet.Predmet.Id),
+                        Prostorija = db.Prostorije.Find(predmet.Prostorija.Id),
+                        Kolicina = predmet.Kolicina,
+                        DatumZaduzivanja = DateTime.Now
+                    });
                 }
                 db.SaveChanges();
             }

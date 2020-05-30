@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,16 +36,34 @@ namespace Inventory.Pages
         private void StampajIzvestaj_Click(object sender, RoutedEventArgs e)
         {
             string path = Directory.GetCurrentDirectory() + "\\izvestaj.pdf";
-            MessageBox.Show("Stampamo izvestaj");
+            var trenutniRadnik = (Application.Current as App).trenutniRadnik;
             using (var doc = new PdfWrapper(path))
             {
-                doc.DodajNaslov("Izvestaj o zaduzivanju", 14);
-                doc.DodajParagraf("Potvrdjujem da sam dana 01.01.2020. godine zaduzio sledeci inventar koji mi se stavlja na zaduzenje ... tekst osmislite samostalno");
-                doc.DodajTabelu<Inventory.Inventar>(zaduzeniPredmeti);
+                doc.DodajNaslov("Izvestaj o zaduzivanju", 18);
+                doc.DodajParagraf($"Radnik: {trenutniRadnik.Ime} {trenutniRadnik.Prezime} ({trenutniRadnik.Username})");
+                doc.DodajParagraf($"Potvrdjujem da sam dana {DateTime.Now} zaduzio sledeci inventar iz prostorije {zaduzeniPredmeti[0].Prostorija.NazivProstorije} koji mi se stavlja na zaduzenje:");
+                doc.DodajTabelu<ZaStampu>(zaduzeniPredmeti.Select(p => new ZaStampu{
+                    Naziv = p.Predmet.Naziv,
+                    Marka = p.Predmet.Marka,
+                    Model = p.Predmet.Model,
+                    Cena = p.Predmet.Cena.ToString(),
+                    Kolicina = p.Kolicina.ToString(),
+                    Prostorija = p.Prostorija.NazivProstorije
+                }).ToList());
                 doc.DodajMPiPotpis();
             }
 
             PdfWrapper.OtvoriFile(path);
         }
+    }
+
+    class ZaStampu
+    {
+        public String Naziv { get; set; }
+        public String Marka { get; set; }
+        public String Model { get; set; }
+        public String Cena { get; set; }
+        public String Kolicina { get; set; }
+        public String Prostorija { get; set; }
     }
 }

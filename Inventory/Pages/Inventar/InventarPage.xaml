@@ -39,7 +39,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Column="1" Margin="10" Width="200">
+            <StackPanel Grid.Column="1" Margin="10" Width="250">
 
                 <Button Margin="10" Click="ZaduziInventar_Click">Zaduzi inventar</Button>
                 <Button Margin="10" Click="RazduziInventar_Click">Razduzi inventar</Button>
