@@ -22,7 +22,7 @@ namespace Inventory
     {
         public MainWindow()
         {
-            // DB warm up
+            // DB warm up, jer je prvi request spor
             using (var db = new InventoryContext())
             {
                 var model = db.Model;
