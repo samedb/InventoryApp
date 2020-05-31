@@ -34,7 +34,7 @@ namespace Inventory.Pages.Inventar
             using (var db = new InventoryContext())
             {
                 var zaduzenja = await db.Zaduzenja.Where(z => z.Prostorija.Id == prostorija.Id)
-                    .Include(z => z.Predmet).Include(z => z.Prostorija).Include(z => z.Radnik).ToListAsync();
+                    .Include(z => z.Predmet).Include(z => z.Prostorija).Include(z => z.RadnikKojiDajeInventar).Include(z => z.RadnikKojiPrimaInventar).ToListAsync();
                 ZaduzeniPredmetiDataGrid.ItemsSource = zaduzenja;
             }
         }

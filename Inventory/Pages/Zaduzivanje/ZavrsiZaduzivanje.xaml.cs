@@ -22,9 +22,11 @@ namespace Inventory.Pages
     public partial class ZavrsiZaduzivanje : Page
     {
         private List<Inventory.Inventar> zaduzeniPredmeti;
-        public ZavrsiZaduzivanje(List<Inventory.Inventar> zaduzeniPredmeti)
+        private Radnik radnikKojiPrimaInventar;
+        public ZavrsiZaduzivanje(List<Inventory.Inventar> zaduzeniPredmeti, Radnik radnikKojiPrimaInventar)
         {
             this.zaduzeniPredmeti = zaduzeniPredmeti;
+            this.radnikKojiPrimaInventar = radnikKojiPrimaInventar;
             InitializeComponent();
         }
 
@@ -40,7 +42,8 @@ namespace Inventory.Pages
             using (var doc = new PdfWrapper(path))
             {
                 doc.DodajNaslov("Izvestaj o zaduzivanju", 18);
-                doc.DodajParagraf($"Radnik: {trenutniRadnik.Ime} {trenutniRadnik.Prezime} ({trenutniRadnik.Username})");
+                doc.DodajParagraf($"Radnik koji izdaje inventar: {trenutniRadnik.Ime} {trenutniRadnik.Prezime} ({trenutniRadnik.Username})");
+                doc.DodajParagraf($"Radnik koji prima inventar: {radnikKojiPrimaInventar.Ime} {radnikKojiPrimaInventar.Prezime} ({radnikKojiPrimaInventar.Username})");
                 doc.DodajParagraf($"Potvrdjujem da sam dana {DateTime.Now} zaduzio sledeci inventar iz prostorije {zaduzeniPredmeti[0].Prostorija.NazivProstorije} koji mi se stavlja na zaduzenje:");
                 doc.DodajTabelu<ZaStampu>(zaduzeniPredmeti.Select(p => new ZaStampu{
                     Naziv = p.Predmet.Naziv,
@@ -65,5 +68,6 @@ namespace Inventory.Pages
         public String Cena { get; set; }
         public String Kolicina { get; set; }
         public String Prostorija { get; set; }
+
     }
 }

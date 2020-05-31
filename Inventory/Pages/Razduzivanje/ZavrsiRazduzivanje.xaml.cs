@@ -39,7 +39,7 @@ namespace Inventory.Pages
             using (var doc = new PdfWrapper(path))
             {
                 doc.DodajNaslov("Izvestaj o razduzivanju", 18);
-                doc.DodajParagraf($"Radnik: {trenutniRadnik.Ime} {trenutniRadnik.Prezime} ({trenutniRadnik.Username})");
+                doc.DodajParagraf($"Radnik koji prima inventar: {trenutniRadnik.Ime} {trenutniRadnik.Prezime} ({trenutniRadnik.Username})");
                 doc.DodajParagraf($"Potvrdjujem da sam dana {DateTime.Now} razduzio sledeci inventar u prostoriju {razduzeniPredmeti[0].Prostorija.NazivProstorije} koji mi je bio stavljen na zaduzenje:");
                 doc.DodajTabelu<ZaStampu2>(razduzeniPredmeti.Select(p => new ZaStampu2
                 {
@@ -49,7 +49,9 @@ namespace Inventory.Pages
                     Model = p.Predmet.Model,
                     Cena = p.Predmet.Cena.ToString(),
                     Kolicina = p.Kolicina.ToString(),
-                    DatumZaduzivanja = p.DatumZaduzivanja.ToString()
+                    DatumZaduzivanja = p.DatumZaduzivanja.ToString(),
+                    KoJeDaoInventar = p.RadnikKojiDajeInventar.Username,
+                    KoJePrimioInventar = p.RadnikKojiPrimaInventar.Username
                 }).ToList());
                 doc.DodajMPiPotpis();
             }
@@ -67,5 +69,7 @@ namespace Inventory.Pages
         public string Cena { get; set; }
         public string Kolicina { get; set; }
         public string DatumZaduzivanja { get; set; }
+        public string KoJeDaoInventar { get; set; }
+        public string KoJePrimioInventar { get; set; }
     }
 }

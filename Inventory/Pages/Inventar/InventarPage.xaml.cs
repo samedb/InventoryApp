@@ -34,7 +34,7 @@ namespace Inventory.Pages
             DodelaSefaButton.Visibility = (prostorija.SefProstorije != null) ? Visibility.Collapsed : Visibility.Visible;
 
             var trenutniRadnik = (Application.Current as App).trenutniRadnik;
-            SefProstorijePanel.Visibility = trenutniRadnik.Username == prostorija.SefProstorije.Username ? Visibility.Visible : Visibility.Collapsed;
+            SefProstorijePanel.Visibility = trenutniRadnik.Username == prostorija.SefProstorije?.Username ? Visibility.Visible : Visibility.Collapsed;
 
         }
 

@@ -111,7 +111,9 @@ namespace Inventory
         [Key]
         public int Id { get; set; }
         [Required]
-        public Radnik Radnik { get; set; }
+        public Radnik RadnikKojiDajeInventar { get; set; }
+        [Required]
+        public Radnik RadnikKojiPrimaInventar { get; set; }
         [Required]
         public Predmet Predmet { get; set; }
         [Required]

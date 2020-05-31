@@ -150,7 +150,11 @@ namespace Inventory.Migrations
                     b.Property<int>("ProstorijaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("RadnikUsername")
+                    b.Property<string>("RadnikKojiDajeInventarUsername")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RadnikKojiPrimaInventarUsername")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -160,7 +164,9 @@ namespace Inventory.Migrations
 
                     b.HasIndex("ProstorijaId");
 
-                    b.HasIndex("RadnikUsername");
+                    b.HasIndex("RadnikKojiDajeInventarUsername");
+
+                    b.HasIndex("RadnikKojiPrimaInventarUsername");
 
                     b.ToTable("Zaduzenja");
                 });
@@ -201,9 +207,15 @@ namespace Inventory.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Inventory.Radnik", "Radnik")
+                    b.HasOne("Inventory.Radnik", "RadnikKojiDajeInventar")
                         .WithMany()
-                        .HasForeignKey("RadnikUsername")
+                        .HasForeignKey("RadnikKojiDajeInventarUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Inventory.Radnik", "RadnikKojiPrimaInventar")
+                        .WithMany()
+                        .HasForeignKey("RadnikKojiPrimaInventarUsername")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

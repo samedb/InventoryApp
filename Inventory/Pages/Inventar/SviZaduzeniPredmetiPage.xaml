@@ -40,7 +40,8 @@
                 <DataGridTextColumn Header="Cena" Binding="{Binding Predmet.Cena}"/>
                 <DataGridTextColumn Header="Kolicina" Binding="{Binding Kolicina}" />
                 <DataGridTextColumn Header="Datum zaduzenja" Binding="{Binding DatumZaduzivanja}" Width="2*"/>
-                <DataGridTextColumn Header="Ko je zaduzio" Binding="{Binding Radnik.Username}" />
+                <DataGridTextColumn Header="Ko je dao inventar" Binding="{Binding RadnikKojiDajeInventar}" Width="2*"/>
+                <DataGridTextColumn Header="Ko je primio inventar" Binding="{Binding RadnikKojiPrimaInventar}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
 

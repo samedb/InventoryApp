@@ -47,7 +47,16 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Click="Zaduzi_Click" Grid.Row="2" HorizontalAlignment="Center" Margin="10" Width="150">Zaduzi</Button>
+        <Grid Grid.Row="2" Margin="20" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Radnik koji zaduzuje inventar:</TextBlock>
+                <ComboBox Name="cbRadnici" Width="200" Margin="10"/>
+            </StackPanel>
+            
+            <Button Click="Zaduzi_Click" Margin="10" Width="150" HorizontalAlignment="Right">Zaduzi</Button>
+            
+        </Grid>
+
 
     </Grid>
 

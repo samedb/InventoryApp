@@ -23,6 +23,11 @@ namespace Inventory.Pages
         public ZaduzivanjePage(List<Inventory.Inventar> inventar)
         {
             InitializeComponent();
+            using (var db = new InventoryContext())
+            {
+                var radnici = db.Radnici.ToList();
+                cbRadnici.ItemsSource = radnici;
+            }
             InventarDataGrid.ItemsSource = inventar;
         }
 
@@ -48,6 +53,14 @@ namespace Inventory.Pages
                 return;
             }
 
+            var radnikKojiPrimaInventar = cbRadnici.SelectedItem as Radnik;
+            if(radnikKojiPrimaInventar == null)
+                    {
+                MessageBox.Show("Morate za odaberete radnika koji zaduzuje inventar!");
+                return;
+            }
+
+
             using (var db = new InventoryContext())
             {
                 foreach (var predmet in zaZaduzivanje)
@@ -72,7 +85,8 @@ namespace Inventory.Pages
                     // Unesi u tabelu Zaduzenje
                     db.Add(new Zaduzenje
                     {
-                        Radnik = db.Radnici.Find((Application.Current as App).trenutniRadnik.Username),
+                        RadnikKojiDajeInventar = db.Radnici.Find((Application.Current as App).trenutniRadnik.Username),
+                        RadnikKojiPrimaInventar = db.Radnici.Find(radnikKojiPrimaInventar.Username),
                         Predmet = db.Predmeti.Find(predmet.Predmet.Id),
                         Prostorija = db.Prostorije.Find(predmet.Prostorija.Id),
                         Kolicina = predmet.Kolicina,
@@ -83,7 +97,7 @@ namespace Inventory.Pages
             }
 
             // Predji na page gde se stampa izvestaj
-            NavigationService.Navigate(new ZavrsiZaduzivanje(zaZaduzivanje));
+            NavigationService.Navigate(new ZavrsiZaduzivanje(zaZaduzivanje, radnikKojiPrimaInventar));
         }
     }
 }

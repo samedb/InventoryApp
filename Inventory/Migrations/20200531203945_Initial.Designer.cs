@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20200530143231_Initial")]
+    [Migration("20200531203945_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,7 +152,11 @@ namespace Inventory.Migrations
                     b.Property<int>("ProstorijaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("RadnikUsername")
+                    b.Property<string>("RadnikKojiDajeInventarUsername")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RadnikKojiPrimaInventarUsername")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -162,7 +166,9 @@ namespace Inventory.Migrations
 
                     b.HasIndex("ProstorijaId");
 
-                    b.HasIndex("RadnikUsername");
+                    b.HasIndex("RadnikKojiDajeInventarUsername");
+
+                    b.HasIndex("RadnikKojiPrimaInventarUsername");
 
                     b.ToTable("Zaduzenja");
                 });
@@ -203,9 +209,15 @@ namespace Inventory.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Inventory.Radnik", "Radnik")
+                    b.HasOne("Inventory.Radnik", "RadnikKojiDajeInventar")
                         .WithMany()
-                        .HasForeignKey("RadnikUsername")
+                        .HasForeignKey("RadnikKojiDajeInventarUsername")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Inventory.Radnik", "RadnikKojiPrimaInventar")
+                        .WithMany()
+                        .HasForeignKey("RadnikKojiPrimaInventarUsername")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

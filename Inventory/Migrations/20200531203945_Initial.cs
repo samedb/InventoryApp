@@ -98,7 +98,8 @@ namespace Inventory.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RadnikUsername = table.Column<string>(nullable: false),
+                    RadnikKojiDajeInventarUsername = table.Column<string>(nullable: false),
+                    RadnikKojiPrimaInventarUsername = table.Column<string>(nullable: false),
                     PredmetId = table.Column<int>(nullable: false),
                     ProstorijaId = table.Column<int>(nullable: false),
                     Kolicina = table.Column<int>(nullable: false),
@@ -120,8 +121,14 @@ namespace Inventory.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Zaduzenja_Radnici_RadnikUsername",
-                        column: x => x.RadnikUsername,
+                        name: "FK_Zaduzenja_Radnici_RadnikKojiDajeInventarUsername",
+                        column: x => x.RadnikKojiDajeInventarUsername,
+                        principalTable: "Radnici",
+                        principalColumn: "Username",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Zaduzenja_Radnici_RadnikKojiPrimaInventarUsername",
+                        column: x => x.RadnikKojiPrimaInventarUsername,
                         principalTable: "Radnici",
                         principalColumn: "Username",
                         onDelete: ReferentialAction.Cascade);
@@ -153,9 +160,14 @@ namespace Inventory.Migrations
                 column: "ProstorijaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Zaduzenja_RadnikUsername",
+                name: "IX_Zaduzenja_RadnikKojiDajeInventarUsername",
                 table: "Zaduzenja",
-                column: "RadnikUsername");
+                column: "RadnikKojiDajeInventarUsername");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Zaduzenja_RadnikKojiPrimaInventarUsername",
+                table: "Zaduzenja",
+                column: "RadnikKojiPrimaInventarUsername");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
