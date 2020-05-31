@@ -43,7 +43,6 @@
 
                 <Button Margin="10" Click="ZaduziInventar_Click">Zaduzi inventar</Button>
                 <Button Margin="10" Click="RazduziInventar_Click">Razduzi inventar</Button>
-                <Button Margin="10" Click="SviZaduzeniPredmeti_Click">Prikazi sve zaduzene predmete</Button>
                 <Button Margin="10" Click="DodeliSefaProstorije_Click" x:Name="DodelaSefaButton">Dodeli sefa prostorije</Button>
 
                 <StackPanel x:Name="SefProstorijePanel">

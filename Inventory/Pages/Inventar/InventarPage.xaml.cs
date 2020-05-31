@@ -103,10 +103,5 @@ namespace Inventory.Pages
                 MessageBox.Show("Morate da selektujete predmet iz inventara koju zelite da obrisete!");
             }
         }
-
-        private void SviZaduzeniPredmeti_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new SviZaduzeniPredmetiPage(prostorija));
-        }
     }
 }
